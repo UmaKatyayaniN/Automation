@@ -1,0 +1,58 @@
+//Menu class
+package com.pom;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class Menu {
+	
+	WebDriver driver;
+	//Declaring constructor
+	public  Menu(WebDriver driver) {
+		this.driver=driver;
+	}
+	
+	
+	String URL="https://www.amazon.in/";
+	By linkText =By.linkText("Mobiles");
+	By linkText1 =By.linkText("Best Sellers");
+	By linkText2 =By.linkText("Fashion");
+	By Xpath =By.xpath("//*[@id='nav-logo-sprites']");
+	By Id=By.id("twotabsearchtextbox");
+	By Id1=By.id("nav-search-submit-button");
+	By mySelector = By.xpath("//*[@class='a-size-medium a-color-base a-text-normal']");
+
+
+
+public void launch(){
+	driver.get(URL);
+	driver.manage().window().maximize();
+	System.out.println(driver.getTitle());
+}
+public void Listopt() {
+	driver.findElement(linkText).click();
+	driver.navigate().back();
+	driver.findElement(linkText1).click();
+	driver.navigate().back();
+	driver.findElement(linkText2).click();
+	driver.navigate().back();
+}
+public void Searchop() throws InterruptedException {
+	driver.findElement(Xpath).click();
+	Thread.sleep(5000);
+	driver.findElement(Id).sendKeys("Dell Laptop");
+	driver.findElement(Id1).click();
+	Thread.sleep(3000);
+
+	
+	List<WebElement> myElements = driver.findElements(mySelector);
+	for(WebElement e : myElements) {
+		 System.out.println(e.getText());
+	}
+	
+}
+
+}
